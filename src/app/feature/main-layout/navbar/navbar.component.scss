@@ -1,0 +1,130 @@
+.sidebar-fixed {
+  height: 100vh;
+  width: 400px;
+  -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  z-index: 1050;
+  background-color: #fff;
+  padding: 0 1.5rem 1.5rem;
+}
+.sidebar-fixed .list-group .active {
+  -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  -webkit-border-radius: 5px;
+  border-radius: 5px; }
+
+
+@media (max-width: 1199.98px) {
+  .sidebar-fixed {
+    display: none; } }
+.bg-cus{
+  background-color: #08a9ff;
+  z-index: 11;
+  height: calc(100vh - 0px);
+}
+@media (min-width: 768px){
+.bg-cus {
+  max-width: 21% !important;
+  padding-right: 0 !important;
+}
+}
+@media (min-width: 768px){
+.fixed-bottom{
+  max-width: 3% !important;
+  padding-right: 0 !important;
+
+}
+}
+.fixed-bottom.list-group-flush .waves-effect {
+  width: 75px !important;
+}
+.list-group-flush .waves-effect {
+  background-color: #08a9ff;
+}
+.list-group-item {
+  border: 0 !important;
+  color: white !important;
+}
+mdb-icon{
+  margin-top: 7px;
+  margin-bottom: 7px;
+  font-size: 23px;
+}
+.list-group-flush .waves-effect:hover{
+  background: rgba(255, 255, 255, 0.2) !important;
+}
+.avatar {
+  background-color: #0895ff !important;
+}
+.img-fluid {
+  max-width: 75%;
+  height: auto;
+  border: solid 2px white;
+}
+.inp-cus{
+  border-radius: 30px;
+  height: 25px;
+  background-color: #ededed;
+  border: 0px;
+}
+.form-control {
+  font-size: 14px !important;
+  font-family: inherit;
+}
+.cus-icon{
+  font-size: 19px;
+}
+.cus-a:hover{
+  color: #0068ff!important;
+}
+p {
+  font-size: 13px;
+}
+.cus-tag{
+  font-size: 15px;
+}
+.active{
+  background-color: #4b9aff!important;
+  color: white !important;
+}
+mdb-badge{
+  background-color: #e8e8e8 !important;
+  color: #7e8388 !important;
+  margin-right: 10px;
+  margin-bottom: 5px;
+}
+mdb-badge:hover {
+  background-color: #0068ff !important;
+  color: white !important;
+}
+.badge {
+  box-shadow: none;
+
+}
+.card {
+  border: 0 solid rgba(0, 0, 0, 0.125);
+  height: 60px;
+}
+.card .img-fluid {
+  max-width: 100%;
+}
+.card:hover {
+  background-color: #ededed;
+}
+.cus-over{
+  height:700px;
+  overflow:auto;
+}
+@media (min-width: 768px){
+ .cstom{
+   width: 65% !important;
+ }
+}
+
+.chat-avatar .img-fluid{
+  background-color: white;
+  max-width: 70px;
+}
+ a:active {
+  background-color: #0889d6 !important;
+}

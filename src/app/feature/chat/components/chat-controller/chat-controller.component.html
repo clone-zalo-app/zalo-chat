@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-md-12">
+    <a class="float-left mt-3 mb-2 mr-3 ml-2 text-muted"><mdb-icon class="custom-icon" fab icon="reddit-square"></mdb-icon></a>
+    <a class="float-left mt-3 mb-2 mr-3 ml-2 text-muted"><mdb-icon class="custom-icon" far icon="image"></mdb-icon></a>
+    <a class="float-left mt-3 mb-2 mr-3 ml-2 text-muted">
+      <mdb-icon class="custom-icon" fas icon="paperclip"></mdb-icon>
+      <span class="small text-primary">1GB</span>
+    </a>
+    <a class="float-left mt-3 mb-2 mr-3 ml-2 text-muted"><mdb-icon class="custom-icon" far icon="address-card"></mdb-icon></a>
+    <a class="float-left mt-3 mb-2 mr-3 ml-2 text-muted"><mdb-icon class="custom-icon" far icon="clock"></mdb-icon></a>
+    <a class="float-left mt-3 mb-2 mr-3 ml-2 text-muted"><mdb-icon class="custom-icon" far icon="calendar-check"></mdb-icon></a>
+
+
+  </div>
+  <div class="col-md-12 border-top pl-2">
+    <div class="md-form mb-0 mt-0 float-left">
+      <input placeholder="nhap" mdbInput type="text" id="form1" [(ngModel)]="mess" (keyup)="onCheck()"  class="form-control pl-2 ">
+    </div>
+    <a class="float-right mr-4 mt-3 text-muted" (click)="onLike()" *ngIf="!send"><mdb-icon class="custom-icon like" fas icon="thumbs-up"></mdb-icon></a>
+    <a class="float-right mt-3 font-weight-bold mr-4 text-primary" *ngIf="send" (click)="onSend()">Gửi</a>
+    <a class="float-right mt-3 mr-4 text-muted"><mdb-icon class="custom-icon"  fas icon="at"></mdb-icon></a>
+    <a class="float-right mt-3 mr-4 text-muted"><mdb-icon class="custom-icon" far icon="grin"></mdb-icon></a>
+  </div>
+</div>

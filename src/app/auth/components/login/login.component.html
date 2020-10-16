@@ -1,0 +1,92 @@
+<div class="login-main">
+
+    <div class="row justify-content-md-center fixed-top">
+        <div class="col col-lg-2"></div>
+        <div class="col-12 col-md-auto">
+            <div class="">
+                <div class="text-center">
+                    <p class="h2 mb-4">Clone Zalo App</p>
+                    <p>Đăng nhập Clone Zalo App cả thế giới trong tầm tay</p>
+                </div>
+
+                <form class="text-center border border-light p-5" *ngIf="login" >
+                    <!-- Button sign in-->
+                    <button (click)="clickPhone()" class="btn btn-info btn-block " type="button"> Đăng nhập với số điện thoại</button>
+
+                    <button (click)="clickEmail()" class="btn btn-info btn-block my-4  " type="button"> Đăng nhập với địa chỉ Email</button>
+                    <p></p>
+                    <!-- Register -->
+                    <p>Bạn chưa có tài khoản?
+                        <a title="Đăng ký mới!" style="color: #17A2B8">Đăng ký ngay!</a>
+                    </p>
+                </form>
+                <form class="text-center border border-light p-5" [formGroup]="loginFormByEmail" *ngIf="loginEmail" >
+                    <div class="form-group">
+                        <input mdbValidate mdbInput type="text" id="email" class="form-control mb-2" placeholder="Họ và tên" formControlName="email">
+
+                    </div>
+
+                    <div class="form-group">
+                        <input mdbValidate [validateSuccess]="false" class="form-control mb-2" placeholder="Mật khẩu" type="password" mdbInput formControlName="password">
+
+                    </div>
+                    <div class="alert alert-danger" role="alert" *ngIf="error">
+                        Sai tài khoản hoặc mật khẩu
+                    </div>
+                    <div class="alert alert-primary" role="alert" *ngIf="loginSuccess">
+                        Đăng nhập thành công
+                    </div>
+
+                    <a class="back" (click)="clickForgetPassWordEmail()" style="color: #17A2B8" >Quên mật khẩu?</a>
+
+                    <div class="form-group">
+                        <button [disabled]="loading" (click)="onLoginEmail()" class="btn btn-info btn-block my-4" type="button">
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                            Đăng nhập
+                        </button>
+                    </div>
+
+
+
+                    <a (click)="clickBack()" class="back">Quay về</a>
+
+                </form>
+                <form class="text-center border border-light p-5" *ngIf="loginPhone" >
+                    <input class="form-control mb-2" required placeholder="Số điện thoại" type="email">
+                    <input class="form-control mb-2" required placeholder="Mật khẩu" type="password">
+
+                    <a (click)="clickForgetPassWordPhone()" class="back" style="color: #17A2B8">Quên mật khẩu?</a>
+
+                    <button class="btn btn-info btn-block my-4  " type="button"> Đăng nhập</button>
+
+                    <a (click)="clickBack()"  class="back">Quay về</a>
+
+                </form>
+                <form class="text-center border border-light p-5" *ngIf="forgetPasswordEmail" >
+                    <p>Nhập tài khoản email để gửi một email đổi mật khẩu</p>
+
+                    <input class="form-control mb-2" required placeholder="Địa chỉ Email" type="email">
+
+                    <button class="btn btn-info btn-block my-4" type="button"> Gửi liên kết đến Email của bạn</button>
+
+                    <a (click)="clickBack()" class="back">Quay về</a>
+
+                </form>
+                <form class="text-center border border-light p-5" *ngIf="forgetPasswordPhone" >
+                    <p>Nhập số điện thoại của bạn</p>
+
+                    <input class="form-control mb-2" required placeholder="Số điện thoại">
+
+                    <button class="btn btn-info btn-block my-4" type="button"> Tiếp tục </button>
+
+                    <a (click)="clickBack()" class="back">Quay về</a>
+
+                </form>
+
+            </div>
+        </div>
+        <div class="col col-lg-2"></div>
+
+    </div>
+
+</div>

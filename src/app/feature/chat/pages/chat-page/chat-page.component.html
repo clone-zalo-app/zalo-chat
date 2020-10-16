@@ -1,0 +1,8 @@
+<div #scrollMe class="cus-bg pb-5">
+  <div class="chat mb-0 mt-0" *ngFor="let mess of messList">
+    <app-messenger-item  *ngIf="mess" [mess]="mess"></app-messenger-item><br>
+  </div>
+</div>
+<div class="fixed-bottom custom-c bg-white">
+  <app-chat-controller (sendMess)="onSend($event)" ></app-chat-controller>
+</div>

@@ -1,0 +1,152 @@
+<header>
+
+  <!-- Sidebar -->
+  <div class="sidebar-fixed position-fixed fixed-top pl-0 pr-0">
+      <div class="row">
+        <div class="col-md-3 bg-cus text-center">
+          <a class="avatar ">
+            <img src="https://s120-ava-talk.zadn.vn/9/a/f/8/65/120/c5e69c6894b01412423da38a15be9c50.jpg" alt="avatar" class="rounded-circle img-fluid mt-2">
+          </a>
+          <div class="list-group list-group-flush mt-3">
+
+            <a routerLinkActive="active" class="list-group-item list-group-item-action waves-effect text-center" routerLink="{{routing.CHAT}}">
+              <mdb-icon far icon="comment" ></mdb-icon>
+            </a>
+            <a  routerLinkActive="active" class="list-group-item list-group-item-action waves-effect text-center">
+              <mdb-icon far icon="address-book"></mdb-icon>
+            </a>
+            <a  routerLinkActive="active" class="list-group-item list-group-item-action waves-effect text-center">
+              <mdb-icon fas icon="at"></mdb-icon>
+            </a>
+            <a  routerLinkActive="active" class="list-group-item list-group-item-action waves-effect text-center">
+              <mdb-icon far icon="check-square"></mdb-icon>
+            </a>
+
+          </div>
+          <div class="list-group  fixed-bottom list-group-flush">
+
+            <a routerLinkActive="active" class="list-group-item list-group-item-action waves-effect text-center">
+              <mdb-icon far icon="star"></mdb-icon>
+            </a>
+            <a  routerLinkActive="active" class="list-group-item list-group-item-action waves-effect text-center">
+              <mdb-icon fas icon="cog"></mdb-icon>
+            </a>
+
+          </div>
+        </div>
+        <div class="col-md-9">
+          <div class="row">
+            <div class="col-md-12 pt-3">
+              <h6 class="font-weight-bolder">Zalo - {{user.name}}</h6>
+            </div>
+            <div class="col-md-9 pr-0">
+              <input mdbInput type="text" placeholder="Tìm kiếm bạn bè, nhóm và tin nhắn" id="search" class="form-control inp-cus mt-2">
+            </div>
+            <div class="col-md-3 pt-1 pr-0">
+              <a class="cus-a">
+                <mdb-icon far icon="user" class="cus-icon"></mdb-icon>
+              </a>
+              <a class="cus-a ml-3">
+                <mdb-icon fab icon="ubuntu"></mdb-icon>
+              </a>
+            </div>
+          </div>
+          <hr class="mb-2">
+          <div class="row">
+            <div class="col">
+                <p class="font-weight-bolder">Phân loại</p>
+            </div>
+            <div class="col">
+              <a class="cus-a float-right "><mdb-icon class="mt-0"  fas icon="angle-down"></mdb-icon></a>
+              <a class="cus-a float-right"><mdb-icon class="cus-tag mr-2" fas icon="tag"></mdb-icon></a>
+            </div>
+            <div class="col-md-12">
+              <mdb-badge pill="true" class="active text-lowercase" ><a>Tất cả</a></mdb-badge>
+              <mdb-badge pill="true" class="text-lowercase"><a>Khách hàng</a></mdb-badge>
+              <mdb-badge pill="true" class="text-lowercase"><a>Gia đình</a></mdb-badge>
+              <mdb-badge pill="true" class="text-lowercase"><a>Công việc </a></mdb-badge>
+              <mdb-badge pill="true" class="text-lowercase"><a>Bạn bè</a></mdb-badge>
+              <mdb-badge pill="true" class="text-lowercase"><a>Trả lời sau</a></mdb-badge>
+              <mdb-badge pill="true" class="text-lowercase"><a>Đồng nghiệp</a></mdb-badge>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col">
+              <p class="font-weight-bolder"><a>Tin nhắn</a></p>
+            </div>
+            <div class="col">
+              <p class="font-weight-bolder float-right"><a>Đánh dấu đã đọc</a></p>
+            </div>
+          </div>
+          <div class="cus-over" >
+            <a class="card" *ngFor="let room of listRoom">
+              <div class="card-body p-0" (click)="onGetRoom(room)">
+                <div class="row" *ngIf="room.user">
+                  <div class="col-md-3">
+                    <img src="../../../../assets/images/{{room.user.avatar}}" alt="avatar" class="rounded-circle img-fluid mt-1">
+                  </div>
+                  <div class="col-md-9 pt-2">
+                    <span class="font-weight-bolder">{{room.user.name}}</span>
+                    <p *ngIf="room.listMess.length>0">{{room.listMess[room.listMess.length-1].content}}</p>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+  </div>
+  <mdb-navbar *ngIf="!chatPage" SideClass="navbar navbar-expand-md scrolling-navbar double-nav" [containerInside]="false" >
+    <navlinks class="navbar-container">
+      <!-- SideNav slide-out button -->
+      <div class="float-xs-left">
+        <a  class="button-collapse-non-fixed">
+          <mdb-icon fas icon="bars"></mdb-icon>
+        </a>
+      </div>
+      <!--/. SideNav slide-out button -->
+    </navlinks>
+    <navlinks *ngIf="selectedRoom">
+      <links class="cstom">
+
+        <!-- Links -->
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="chat-avatar ">
+              <div class="row">
+                <div class="col-md-4">
+                  <img src="../../../../assets/images/{{selectedRoom.user.avatar}}" alt="avatar" class="rounded-circle img-fluid">
+                </div>
+                <div class="col-md-8 pl-1">
+                  <h6 class="mt-2  font-weight-bolder">{{selectedRoom.user.name}}</h6>
+                  <label class="font-small text-muted">truy cập 10 phút trước</label>
+                </div>
+
+              </div>
+            </a>
+
+          </li>
+        </ul>
+      </links>
+    </navlinks>
+    <navlinks>
+
+      <ul class="nav navbar-nav nav-flex-icons ml-auto ie-double-nav">
+        <li class="nav-item">
+          <a class="nav-link waves-light" mdbWavesEffect >
+            <mdb-icon  fas icon="search"></mdb-icon>
+          </a>
+        </li>
+        <li class="nav-item" >
+          <a class="nav-link waves-light" mdbWavesEffect>
+            <mdb-icon fas icon="columns"></mdb-icon>
+          </a>
+        </li>
+      </ul>
+
+    </navlinks>
+  </mdb-navbar>
+
+
+</header>

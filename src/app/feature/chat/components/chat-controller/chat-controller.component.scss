@@ -1,0 +1,18 @@
+input{
+  border-bottom: 0px solid #ced4da !important;
+  width: 1350px !important;
+  padding-top: 15px !important;
+  padding-bottom: 15px !important;
+
+}
+.md-form input[type=text]:focus {
+  box-shadow: 0 0px 0 0 #4285f4 !important;
+  //border-top: 1px solid #4285f4 !important;
+}
+.custom-icon{
+  font-size: 25px;
+}
+.like {
+  color: hsl(39deg 92% 67%);
+}
+

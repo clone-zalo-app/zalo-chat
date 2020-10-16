@@ -1,0 +1,56 @@
+{
+  "room": [
+    {
+      "id": 1,
+      "name": "room1",
+      "listMess": [],
+      "user": {
+        "id": 1,
+        "name": "Pham Minh Khoa",
+        "avatar": "khoa.png"
+      }
+    },
+    {
+      "id": 2,
+      "name": "room2",
+      "listMess": [],
+      "user": {
+        "id": 2,
+        "name": "Nguyên Thế Vĩ",
+        "avatar": "vi.png"
+      }
+    },
+    {
+      "id": 3,
+      "name": "room3",
+      "listMess": [],
+      "user": {
+        "id": 3,
+        "name": "Nguyễn Thành Lộc",
+        "avatar": "loc.png"
+      }
+    },
+    {
+      "id": 4,
+      "name": "room4",
+      "listMess": [],
+      "user": {
+        "id": 4,
+        "name": "Trần Thi",
+        "avatar": "thi.png"
+      }
+    }
+  ],
+  "user": [
+    {
+      "id": 1,
+      "name": "linh123",
+      "room": null
+    },
+    {
+      "id": 2,
+      "name": "111",
+      "room": null
+    }
+  ]
+}
