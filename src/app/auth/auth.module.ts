@@ -19,4 +19,6 @@ const routes: Routes = [
   exports: [],
   declarations: [AuthComponent, LoginComponent, RegisterComponent]
 })
-export class AuthModule {}
+export class AuthModule {
+
+}

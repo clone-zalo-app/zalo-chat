@@ -1,5 +1,5 @@
 
-<div class="mess-item" *ngIf="mess.user.name === user.name">
+<div class="mess-item" *ngIf="mess.user.email === user.email">
   <img src="https://s120-ava-talk.zadn.vn/9/a/f/8/65/120/c5e69c6894b01412423da38a15be9c50.jpg" alt="avatar" class="rounded-circle img-fluid float-right ml-2">
   <mdb-badge class="text-wrap  pt-2 pb-3 pl-2 pr-2 mt-2 text-dark float-right" >
     <span class=" float-left custom-content"> {{mess.content}} </span><br>
@@ -7,7 +7,7 @@
     <span class="small float-right mt-2 ml-5" *ngIf="mess.send == true">Đã gửi</span>
   </mdb-badge>
 </div>
-<div class="mess-item" *ngIf="mess.user.name !== user.name">
+<div class="mess-item" *ngIf="mess.user.email !== user.email">
   <img src="../../../../../assets/images/khoa.png" alt="avatar" class="rounded-circle img-fluid float-left mr-2">
   <mdb-badge class="bg-g  pt-2 pb-3 pl-2 pr-2 mt-2 text-dark float-left" >
     <span class=" float-left custom-content"> {{mess.content}} </span><br>

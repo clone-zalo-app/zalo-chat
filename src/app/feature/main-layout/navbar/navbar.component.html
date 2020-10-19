@@ -37,7 +37,7 @@
         <div class="col-md-9">
           <div class="row">
             <div class="col-md-12 pt-3">
-              <h6 class="font-weight-bolder">Zalo - {{user.name}}</h6>
+              <h6 class="font-weight-bolder">Zalo - {{user.firstName + ' ' + user.lastName}}</h6>
             </div>
             <div class="col-md-9 pr-0">
               <input mdbInput type="text" placeholder="Tìm kiếm bạn bè, nhóm và tin nhắn" id="search" class="form-control inp-cus mt-2">
@@ -80,15 +80,15 @@
             </div>
           </div>
           <div class="cus-over" >
-            <a class="card" *ngFor="let room of listRoom">
-              <div class="card-body p-0" (click)="onGetRoom(room)">
-                <div class="row" *ngIf="room.user">
+            <a class="card" *ngFor="let user of listUser">
+              <div class="card-body p-0" (click)="onGetRoom(user)">
+                <div class="row" *ngIf="user">
                   <div class="col-md-3">
-                    <img src="../../../../assets/images/{{room.user.avatar}}" alt="avatar" class="rounded-circle img-fluid mt-1">
+                    <img src="../../../../assets/images/khoa.png" alt="avatar" class="rounded-circle img-fluid mt-1">
                   </div>
                   <div class="col-md-9 pt-2">
-                    <span class="font-weight-bolder">{{room.user.name}}</span>
-                    <p *ngIf="room.listMess.length>0">{{room.listMess[room.listMess.length-1].content}}</p>
+                    <span class="font-weight-bolder">{{user.userName}}</span>
+                    <p >{{user.email}}</p>
                   </div>
                 </div>
               </div>

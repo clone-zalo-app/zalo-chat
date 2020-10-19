@@ -5,6 +5,7 @@ import {ChatService} from '../../../../core/services/chat.service';
 import {Router} from '@angular/router';
 import {Room} from '../../../../core/models/room';
 import {RoomService} from '../../../../core/services/room.service';
+import {UserModel} from '../../../../core/models/user.model';
 
 @Component({
   selector: 'app-chat-page',
@@ -16,7 +17,7 @@ export class ChatPageComponent implements OnInit {
 
   socket: any;
   messList: MessItem[] = [];
-  user: User;
+  user: UserModel;
   room: Room;
   @ViewChild('scrollMe', {static: false}) scrollFrame: ElementRef;
 
@@ -24,37 +25,28 @@ export class ChatPageComponent implements OnInit {
               private router: Router,
               private roomService: RoomService,
               ) {
-    this.room = JSON.parse(localStorage.getItem('room'))
     this.user = JSON.parse(localStorage.getItem('user'));
-    this.user.room = this.room.name;
-    this.messList = this.room.listMess;
   }
 
   ngOnInit() {
     this.socket = this.chatService.connectSocket();
-    this.roomService.currentRoom.subscribe(value => {
-      this.messList = value.listMess;
-    });
+
 
     this.jonRoom();
   }
   jonRoom() {
+    this.user.room = '1';
     this.socket.emit('join', this.user, () => {
       this.getListChat();
     });
   }
   getListChat() {
     this.socket.on('message', (data: any) => {
-      this.messList = this.room.listMess;
-      if (data.user !== this.user.name) {
+      if (data.user !== this.user.email) {
         const mess: MessItem = {
           id: 1,
           content: data.text,
-          user: {
-            id: 1,
-            name: data.user,
-            room: this.user.room
-          },
+          user: this.user,
           time: '',
           send: true
         };

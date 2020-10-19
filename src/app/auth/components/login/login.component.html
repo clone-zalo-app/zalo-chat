@@ -1,92 +1,101 @@
 <div class="login-main">
 
-    <div class="row justify-content-md-center fixed-top">
-        <div class="col col-lg-2"></div>
-        <div class="col-12 col-md-auto">
-            <div class="">
-                <div class="text-center">
-                    <p class="h2 mb-4">Clone Zalo App</p>
-                    <p>Đăng nhập Clone Zalo App cả thế giới trong tầm tay</p>
-                </div>
+  <div class="row justify-content-md-center fixed-top">
+    <div class="col col-lg-2"></div>
+    <div class="col-12 col-md-auto">
+      <div class="text-center mb-3">
+        <img src="../../../../assets/images/logo.png">
+        <h5 class="mt-4">Đăng nhập bằng tài khoản Zalo</h5>
+        <p class="h5 mt-4">chat.zalo.me</p>
+      </div>
+      <div class="card border-0">
+        <div class="card-header row mr-0 ml-0 text-center pb-0 pt-4">
+          <div class="col">
+            <a (click)="loginByPhone = true; loginByEmail = false"><p
+              [ngClass]="loginByPhone?'border-bottom-p':'text-muted'" class="mb-0 custom-p text-uppercase">Với số điện
+              thoại</p></a>
+          </div>
+          <div class="col border-left">
+            <a (click)="loginByEmail = true; loginByPhone = false"><p
+              [ngClass]="loginByEmail?'border-bottom-p':'text-muted'" class="mb-0 custom-p text-uppercase">Với email</p>
+            </a>
+          </div>
+        </div>
+        <div class="card-body">
 
-                <form class="text-center border border-light p-5" *ngIf="login" >
-                    <!-- Button sign in-->
-                    <button (click)="clickPhone()" class="btn btn-info btn-block " type="button"> Đăng nhập với số điện thoại</button>
+<!--          login by phone-->
 
-                    <button (click)="clickEmail()" class="btn btn-info btn-block my-4  " type="button"> Đăng nhập với địa chỉ Email</button>
-                    <p></p>
-                    <!-- Register -->
-                    <p>Bạn chưa có tài khoản?
-                        <a title="Đăng ký mới!" style="color: #17A2B8">Đăng ký ngay!</a>
-                    </p>
-                </form>
-                <form class="text-center border border-light p-5" [formGroup]="loginFormByEmail" *ngIf="loginEmail" >
-                    <div class="form-group">
-                        <input mdbValidate mdbInput type="text" id="email" class="form-control mb-2" placeholder="Họ và tên" formControlName="email">
-
-                    </div>
-
-                    <div class="form-group">
-                        <input mdbValidate [validateSuccess]="false" class="form-control mb-2" placeholder="Mật khẩu" type="password" mdbInput formControlName="password">
-
-                    </div>
-                    <div class="alert alert-danger" role="alert" *ngIf="error">
-                        Sai tài khoản hoặc mật khẩu
-                    </div>
-                    <div class="alert alert-primary" role="alert" *ngIf="loginSuccess">
-                        Đăng nhập thành công
-                    </div>
-
-                    <a class="back" (click)="clickForgetPassWordEmail()" style="color: #17A2B8" >Quên mật khẩu?</a>
-
-                    <div class="form-group">
-                        <button [disabled]="loading" (click)="onLoginEmail()" class="btn btn-info btn-block my-4" type="button">
-                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                            Đăng nhập
-                        </button>
-                    </div>
-
-
-
-                    <a (click)="clickBack()" class="back">Quay về</a>
-
-                </form>
-                <form class="text-center border border-light p-5" *ngIf="loginPhone" >
-                    <input class="form-control mb-2" required placeholder="Số điện thoại" type="email">
-                    <input class="form-control mb-2" required placeholder="Mật khẩu" type="password">
-
-                    <a (click)="clickForgetPassWordPhone()" class="back" style="color: #17A2B8">Quên mật khẩu?</a>
-
-                    <button class="btn btn-info btn-block my-4  " type="button"> Đăng nhập</button>
-
-                    <a (click)="clickBack()"  class="back">Quay về</a>
-
-                </form>
-                <form class="text-center border border-light p-5" *ngIf="forgetPasswordEmail" >
-                    <p>Nhập tài khoản email để gửi một email đổi mật khẩu</p>
-
-                    <input class="form-control mb-2" required placeholder="Địa chỉ Email" type="email">
-
-                    <button class="btn btn-info btn-block my-4" type="button"> Gửi liên kết đến Email của bạn</button>
-
-                    <a (click)="clickBack()" class="back">Quay về</a>
-
-                </form>
-                <form class="text-center border border-light p-5" *ngIf="forgetPasswordPhone" >
-                    <p>Nhập số điện thoại của bạn</p>
-
-                    <input class="form-control mb-2" required placeholder="Số điện thoại">
-
-                    <button class="btn btn-info btn-block my-4" type="button"> Tiếp tục </button>
-
-                    <a (click)="clickBack()" class="back">Quay về</a>
-
-                </form>
+          <form class="p-3" *ngIf="loginByPhone && !loginByEmail" [formGroup]="formPhone">
+            <div class="md-form" >
+              <input mdbValidate type="text" id="phone" class="form-control" mdbInput formControlName="phone">
+              <label for="phone">Số điện thoại</label>
+              <mdb-error class="mt-2" *ngIf="phone.hasError('required') && phone.touched">Chưa nhập số điện thoại</mdb-error>
 
             </div>
-        </div>
-        <div class="col col-lg-2"></div>
+            <div class="md-form mt-4">
+              <input mdbValidate type="password" id="password" class="form-control" mdbInput formControlName="passwordByPhone">
+              <label for="password">Mật khẩu</label>
+              <mdb-error *ngIf="passwordByPhone.hasError('required') && passwordByPhone.touched">Chưa nhập mật khẩu</mdb-error>
+              <mdb-error *ngIf="passwordByPhone.invalid && passwordByPhone.dirty && !passwordByPhone.hasError('required')">Mật khẩu 6 ký tự trở lên</mdb-error>
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="error">
+              {{errorLabel}}
+            </div>
+            <button *ngIf="!loading" mdbBtn class="custom-button" block="true"
+                    [disabled]="formPhone.status !== 'VALID'"
+                    mdbWavesEffect type="submit" disabled
+                    (click)="onLoginByPhone()"
+            >
+              Đăng nhập với mật khẩu
+            </button>
+            <button *ngIf="loading" mdbBtn class="custom-button" block="true" disabled>
+              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              <span class="sr-only">Loading...</span>
+            </button>
+          </form>
 
+<!--          login by email-->
+
+          <form class="p-3" *ngIf="!loginByPhone && loginByEmail" [formGroup]="formEmail">
+            <div class="md-form">
+              <input mdbValidate type="email" id="email" class="form-control" mdbInput formControlName="email">
+              <label for="email">Email</label>
+              <mdb-error *ngIf="email.hasError('required') && email.touched">Chưa nhập email</mdb-error>
+              <mdb-error *ngIf="email.invalid && email.dirty && !email.hasError('required')">Nhập sai email</mdb-error>
+
+            </div>
+            <div class="md-form mt-4">
+              <input mdbValidate type="password" id="password-email" class="form-control" mdbInput formControlName="passwordByEmail">
+              <label for="password-email">Mật khẩu</label>
+              <mdb-error *ngIf="passwordByEmail.hasError('required') && passwordByEmail.touched">Chưa nhập mật khẩu</mdb-error>
+              <mdb-error *ngIf="passwordByEmail.invalid && passwordByEmail.dirty && !passwordByEmail.hasError('required')">Mật khẩu 6 ký tự trở lên</mdb-error>
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="error">
+              {{errorLabel}}
+            </div>
+            <button mdbBtn *ngIf="!loading" class="custom-button" block="true"
+                    mdbWavesEffect type="submit"
+                    [disabled]="formEmail.status !== 'VALID'"
+                    (click)="onLoginByEmail()"
+            >Đăng nhập với mật khẩu
+            </button>
+            <button *ngIf="loading" mdbBtn class="custom-button" block="true" disabled>
+              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              <span class="sr-only">Loading...</span>
+            </button>
+          </form>
+
+
+        </div>
+        <div class="card-footer text-center">
+          <p class="font-weight-light small">Bạn chưa có tài khoản?<a class="ml-2 pb-1 custom-a blue-text"
+                                                                      [routerLink]="['/',routing.AUTH,routing.REGISTER]">
+            Đăng ký ngay!</a></p>
+        </div>
+      </div>
     </div>
+    <div class="col col-lg-2"></div>
+
+  </div>
 
 </div>

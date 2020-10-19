@@ -1,10 +1,12 @@
 import {RouterModule, Routes} from '@angular/router';
 import * as CONST from './core/constants';
 import {NotFoundComponent} from './shared/components/not-found/not-found.component';
+import {UserGuard} from './shared/roles/user.guard';
 const routes: Routes = [
   {path: '', redirectTo: CONST.frontendUrl.AUTH, pathMatch: 'full'},
   {
     path: CONST.frontendUrl.ZALO_APP,
+    canActivate:[UserGuard],
     children: [
       {path: '', loadChildren: () => import('./feature/feature.module').then(value => value.FeatureModule) }
     ]

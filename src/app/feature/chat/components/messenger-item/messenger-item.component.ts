@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MessItem} from '../../../../core/models/mess-item';
 import {User} from '../../../../core/models/user';
+import {UserModel} from '../../../../core/models/user.model';
 
 @Component({
   selector: 'app-messenger-item',
@@ -10,7 +11,7 @@ import {User} from '../../../../core/models/user';
 export class MessengerItemComponent implements OnInit {
 
   @Input() mess: MessItem;
-  user: User;
+  user: UserModel;
   constructor() {
     this.user = JSON.parse(localStorage.getItem('user'));
   }

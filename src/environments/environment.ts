@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'localhost:3007',
+  userUrl: 'http://localhost:3006/',
+  chatUrl: 'localhost:3007',
   firebaseConfig: {
     apiKey: "AIzaSyA9tdaqc3PIRv63w6pCpMMpNKs2xptZzMA",
     authDomain: "clone-zalo-app.firebaseapp.com",

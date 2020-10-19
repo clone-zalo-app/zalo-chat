@@ -1,6 +1,7 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {MessItem} from '../../../../core/models/mess-item';
 import {User} from '../../../../core/models/user';
+import {UserModel} from '../../../../core/models/user.model';
 
 @Component({
   selector: 'app-chat-controller',
@@ -11,7 +12,7 @@ export class ChatControllerComponent implements OnInit {
 
   send = false;
   mess: string;
-  user: User;
+  user: UserModel;
   @Output() sendMess = new EventEmitter<any>()
   constructor() {
     this.user = JSON.parse(localStorage.getItem('user'))

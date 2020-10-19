@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 
-import {User} from '../core/models/user';
 import {Room} from '../core/models/room';
+import {UserModel} from '../core/models/user.model';
 @Component({
   selector: 'app-feature',
   templateUrl: './feature.component.html',
@@ -9,11 +9,10 @@ import {Room} from '../core/models/room';
 })
 export class FeatureComponent implements OnInit {
 
-  user: User;
+  user: UserModel;
   room: Room;
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('user'));
-
   }
   onGetRoom(value) {
     this.room = value;

@@ -8,6 +8,7 @@ import {AppRoutes} from './app.routing';
 import {environment} from '../environments/environment';
 import {AngularFireModule} from '@angular/fire';
 import {HttpClientModule} from '@angular/common/http';
+import {AngularFireAuthModule} from '@angular/fire/auth';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {HttpClientModule} from '@angular/common/http';
     RouterModule,
     AppRoutes,
     AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
     HttpClientModule
   ],
   providers: [],

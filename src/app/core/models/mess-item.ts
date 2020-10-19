@@ -1,9 +1,9 @@
-import {User} from './user';
+import {UserModel} from './user.model';
 
 export interface MessItem {
   id: number,
   content: string;
   time: string;
   send: boolean;
-  user: User;
+  user: UserModel;
 }

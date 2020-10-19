@@ -1,104 +1,91 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 import * as CONST from '../../../core/constants';
-import {LoginInfoEmail} from '../../../core/models/login-info-email';
-import {UserService} from '../../../core/services/user.service';
-import {User} from '../../../core/models/user';
-// import {LoginReq} from '../../../core/models/login';
-// import {AuthService} from "../../../core/services/auth.service";
+import * as firebase from 'firebase';
+import {AuthService} from '../../../core/services/auth.service';
+import {LoginByPhoneModel} from '../../../core/models/loginByPhone.model';
+import {LoginByEmailModel} from '../../../core/models/loginByEmail.model';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
 
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit{
 
-  login = true;
-  loginEmail = false;
-  loginPhone = false;
-  forgetPasswordEmail = false;
-  forgetPasswordPhone = false;
 
-  loginFormByEmail: FormGroup;
-  loginFormByPhone: FormGroup;
+  routing = CONST.frontendUrl;
+  loginByEmail = false;
+  loginByPhone = true;
+  formPhone: FormGroup;
+  formEmail: FormGroup;
   loading = false;
   error = false;
-  loginSuccess = false;
-  userList: User[];
-  // register_url = `/${CONST.frontendUrl.AUTH}/${CONST.frontendUrl.REGISTER}`;
-  home_url = `/${CONST.frontendUrl.AUTH}/${CONST.frontendUrl.LOGIN}`
+  errorLabel: string;
 
   constructor(private router: Router,
               private fb: FormBuilder,
-              private userService: UserService
-              ) {
+              private authService: AuthService
+  ) {
   }
+
 
   ngOnInit(): void {
-    this.userService.getListUser().subscribe(res => {
-      this.userList = res
-    })
-    this.loginFormByEmail = this.fb.group({
-      email: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+    this.formPhone = this.fb.group({
+      phone: ['', [Validators.required]],
+      passwordByPhone: ['', [Validators.required, Validators.minLength(6)]]
     });
-    this.loginFormByPhone = this.fb.group({
-      phone: ['', Validators.required],
-      password: ['', Validators.required],
-    })
-  }
-  get email() {return this.loginFormByEmail.get('email'); }
-  get password() {return this.loginFormByEmail.get('password'); }
+    this.formEmail = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      passwordByEmail: ['', [Validators.required, Validators.minLength(6)]]
+    });
 
-  clickEmail() {
-    this.login = false;
-    this.loginEmail = true;
-    this.loginPhone = false;
   }
-
-  clickPhone() {
-    this.login = false;
-    this.loginEmail = false;
-    this.loginPhone = true;
-  }
-
-  clickBack() {
-    this.login = true;
-    this.loginEmail = false;
-    this.loginPhone = false;
-    this.forgetPasswordEmail = false;
-    this.forgetPasswordPhone = false;
-  }
-
-  clickForgetPassWordEmail() {
-    this.login = false;
-    this.loginEmail = false;
-    this.forgetPasswordEmail = true;
-  }
-
-  clickForgetPassWordPhone() {
-    this.login = false;
-    this.loginPhone = false;
-    this.forgetPasswordPhone = true;
-  }
-  onLoginEmail(){
-    this.loginSuccess = true;
-    const loginInfo: LoginInfoEmail = {
-      email: this.email.value,
-      password: this.password.value
+  get phone() {return this.formPhone.get('phone'); }
+  get passwordByPhone() {return this.formPhone.get('passwordByPhone'); }
+  get email() {return this.formEmail.get('email'); }
+  get passwordByEmail() {return this.formEmail.get('passwordByEmail'); }
+  onLoginByPhone() {
+    this.loading = true;
+    const loginInfo: LoginByPhoneModel = {
+      phone: this.formPhone.get('phone').value,
+      password: this.formPhone.get('passwordByPhone').value
     }
-    const user: User = {
-      id: 1,
-      name: this.email.value,
-      room: null
+    this.authService.loginByPhone(loginInfo).subscribe(res => {
+      if (res.status == 'fail') {
+        this.loading = false;
+        this.error = true
+        this.errorLabel = res.message
+      } else {
+        this.authService.saveLocalStorage(CONST.LocalStorage.USER, res.data);
+        this.router.navigate([this.routing.ZALO_APP])
+      }
+    },error => {this.loading = false})
+  }
+  onLoginByEmail() {
+    this.error = false;
+    this.loading = true;
+    const loginInfo: LoginByEmailModel = {
+      email: this.formEmail.get('email').value,
+      password: this.formEmail.get('passwordByEmail').value
     }
-    this.userService.createUser(user).subscribe(value => {
-      localStorage.setItem('user', JSON.stringify(value));
-        this.router.navigate(['/zalo'])
+    this.authService.loginByEmail(loginInfo).subscribe(res => {
+      this.loading = false;
+        if (res.status == 'fail') {
+          this.loading = false;
+          this.error = true
+          this.errorLabel = res.message
+        } else {
+          this.authService.saveLocalStorage(CONST.LocalStorage.USER, res.data);
+          this.router.navigate([this.routing.ZALO_APP])
+        }
+        },
+      error => {
+      this.error = true;
+      this.loading = false;
     })
-    console.log(loginInfo);
   }
 
 

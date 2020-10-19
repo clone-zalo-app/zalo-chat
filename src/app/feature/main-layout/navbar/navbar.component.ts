@@ -6,6 +6,7 @@ import {RoomService} from '../../../core/services/room.service';
 import {Room} from '../../../core/models/room';
 import {User} from '../../../core/models/user';
 import {UserService} from '../../../core/services/user.service';
+import {UserModel} from '../../../core/models/user.model';
 
 @Component({
   selector: 'app-navbar',
@@ -16,9 +17,10 @@ export class NavbarComponent implements OnInit {
 
   chatPage: boolean
   routing = CONST.frontendUrl;
-  listRoom: Room[];
+  listUser: UserModel[] = [];
+  listRoom: [] = [];
   selectedRoom: Room;
-  @Input() user: User;
+  @Input() user: UserModel;
   @Output() getListMess = new EventEmitter<any>();
   private specialPages: any[] = [
     `/${this.routing.ZALO_APP}`,
@@ -38,23 +40,16 @@ export class NavbarComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    this.roomService.getRoom().subscribe(res => {
-      this.listRoom = res;
-    });
-    this.userService.currentUser.subscribe(value => {
-      this.user = value;
-    })
-    this.roomService.currentRoom.subscribe(value => {
-      this.selectedRoom = value
-      this.getListMess.emit(this.selectedRoom);
+    this.userService.getListUser().subscribe(res => {
+      res.data.forEach(user => {
+        if (user.email !== this.user.email) {
+          this.listUser.push(user);
+        }
+      })
     })
   }
-  onGetRoom(room: Room) {
+  onGetRoom(room: UserModel) {
 
-    this.selectedRoom = room;
-    const user:User = JSON.parse(localStorage.getItem('user'));
-    user.room = room.name;
-    localStorage.setItem('room', JSON.stringify(room));
     this.router.navigate(['zalo','chat'])
   }
 
