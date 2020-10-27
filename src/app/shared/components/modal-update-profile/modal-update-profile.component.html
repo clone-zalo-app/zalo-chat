@@ -1,0 +1,25 @@
+<div class="card">
+  <div class="card-header">
+  <p class="mb-0">Cập nhật thông tin</p>
+  </div>
+  <div class="card-body">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <img src="https://s120-ava-talk.zadn.vn/9/a/f/8/65/120/c5e69c6894b01412423da38a15be9c50.jpg" alt="avatar" class="rounded-circle img-fluid mt-2">
+          <p class="h5 mt-3">{{user.firstName+ ' ' + user.lastName}}</p>
+        </div>
+      </div>
+    <div class="row mt-4">
+      <div class="col-md-8 offset-md-2">
+        <form>
+          <label for="name">Số điện thoại</label>
+          <input id="name" type="text" class="form-control" [ngClass]="user.phone? 'disabled' : ''"  [value]="user.phone" mdbInput mdbValidate [validateSuccess]="false">
+
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+
+  </div>
+</div>

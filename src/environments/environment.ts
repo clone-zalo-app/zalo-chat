@@ -4,17 +4,17 @@
 
 export const environment = {
   production: false,
-  userUrl: 'http://localhost:3006/',
-  chatUrl: 'localhost:3007',
+  userUrl: 'http://52.221.226.206:3009/',
+  chatUrl: 'http://18.188.96.23:3007/',
   firebaseConfig: {
-    apiKey: "AIzaSyA9tdaqc3PIRv63w6pCpMMpNKs2xptZzMA",
-    authDomain: "clone-zalo-app.firebaseapp.com",
-    databaseURL: "https://clone-zalo-app.firebaseio.com",
-    projectId: "clone-zalo-app",
-    storageBucket: "clone-zalo-app.appspot.com",
-    messagingSenderId: "748262888648",
-    appId: "1:748262888648:web:5feeb721b0e1241f8c81fd",
-    measurementId: "G-C1RCGC3ZSL"
+    apiKey: "AIzaSyBXz2-PZTw9k3dbs_FmBbOI3Qr04s67bG4",
+    authDomain: "zalo-app-32088.firebaseapp.com",
+    databaseURL: "https://zalo-app-32088.firebaseio.com",
+    projectId: "zalo-app-32088",
+    storageBucket: "zalo-app-32088.appspot.com",
+    messagingSenderId: "866324423426",
+    appId: "1:866324423426:web:178b1b6fb9c63f6319d81b",
+    measurementId: "G-VT9ZERE1GE"
   }
 };
 

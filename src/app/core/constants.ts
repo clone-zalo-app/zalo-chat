@@ -4,7 +4,7 @@ export const frontendUrl = {
   LOGIN: 'login',
   REGISTER: 'register',
   AUTH: 'auth',
-  CHAT: 'chat',
+  CHAT: 'chat/:id',
   NOT_FOUND: '**'
 };
 export const apiUrl = {

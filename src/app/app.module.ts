@@ -15,13 +15,13 @@ import {AngularFireAuthModule} from '@angular/fire/auth';
     AppComponent,
   ],
   imports: [
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
     BrowserModule,
     CoreModule,
     SharedModule,
     RouterModule,
     AppRoutes,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAuthModule,
     HttpClientModule
   ],
   providers: [],

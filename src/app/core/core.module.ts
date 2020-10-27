@@ -1,8 +1,10 @@
 import {NgModule} from '@angular/core';
+import {AuthService} from './services/auth.service';
 
 @NgModule({
   declarations: [],
   imports: [],
-  exports: []
+  exports: [],
+  providers: [AuthService]
 })
 export class CoreModule {}
