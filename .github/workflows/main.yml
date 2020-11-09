@@ -24,7 +24,7 @@ jobs:
         node-version: '14.x'
     - run: npm install
     - run: npm run-script build
-      
+    - run: firebase use zalo-app-32088
     - uses: w9jds/firebase-action@master
       with:
         args: deploy --only hosting
