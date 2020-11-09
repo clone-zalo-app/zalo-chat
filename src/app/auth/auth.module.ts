@@ -10,6 +10,7 @@ import * as CONST from '../core/constants';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../../environments/environment';
 import {AngularFireAuthModule} from '@angular/fire/auth';
+import { RegisterByPhoneComponent } from './components/register-by-phone/register-by-phone.component';
 
 const routes: Routes = [
   {
@@ -28,7 +29,7 @@ const routes: Routes = [
     ReactiveFormsModule,
   ],
   exports: [],
-  declarations: [AuthComponent, LoginComponent, RegisterComponent]
+  declarations: [AuthComponent, LoginComponent, RegisterComponent, RegisterByPhoneComponent]
 })
 export class AuthModule {
 

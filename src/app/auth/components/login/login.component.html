@@ -29,14 +29,15 @@
             <div class="md-form" >
               <input mdbValidate type="text" id="phone" class="form-control" mdbInput formControlName="phone">
               <label for="phone">Số điện thoại</label>
-              <mdb-error class="mt-2" *ngIf="phone.hasError('required') && phone.touched">Chưa nhập số điện thoại</mdb-error>
+              <mdb-error class="mt-2" *ngIf="phone.hasError('required') && phone.touched ">Chưa nhập số điện thoại</mdb-error>
+              <mdb-error class="mt-2" *ngIf="phone.invalid && phone.dirty && !phone.hasError('required')">Nhập sai số điện thoại</mdb-error>
 
             </div>
             <div class="md-form mt-4">
               <input mdbValidate type="password" id="password" class="form-control" mdbInput formControlName="passwordByPhone">
               <label for="password">Mật khẩu</label>
-              <mdb-error *ngIf="passwordByPhone.hasError('required') && passwordByPhone.touched">Chưa nhập mật khẩu</mdb-error>
-              <mdb-error *ngIf="passwordByPhone.invalid && passwordByPhone.dirty && !passwordByPhone.hasError('required')">Mật khẩu 6 ký tự trở lên</mdb-error>
+              <mdb-error class="mt-2" *ngIf="passwordByPhone.hasError('required') && passwordByPhone.touched">Chưa nhập mật khẩu</mdb-error>
+              <mdb-error class="mt-2" *ngIf="passwordByPhone.invalid && passwordByPhone.dirty && !passwordByPhone.hasError('required')">Mật khẩu 6 ký tự trở lên</mdb-error>
             </div>
             <div class="alert alert-danger" role="alert" *ngIf="error">
               {{errorLabel}}
@@ -60,15 +61,15 @@
             <div class="md-form">
               <input mdbValidate type="email" id="email" class="form-control" mdbInput formControlName="email">
               <label for="email">Email</label>
-              <mdb-error *ngIf="email.hasError('required') && email.touched">Chưa nhập email</mdb-error>
-              <mdb-error *ngIf="email.invalid && email.dirty && !email.hasError('required')">Nhập sai email</mdb-error>
+              <mdb-error class="mt-2" *ngIf="email.hasError('required') && email.touched">Chưa nhập email</mdb-error>
+              <mdb-error class="mt-2" *ngIf="email.invalid && email.dirty && !email.hasError('required')">Nhập sai email</mdb-error>
 
             </div>
             <div class="md-form mt-4">
               <input mdbValidate type="password" id="password-email" class="form-control" mdbInput formControlName="passwordByEmail">
               <label for="password-email">Mật khẩu</label>
-              <mdb-error *ngIf="passwordByEmail.hasError('required') && passwordByEmail.touched">Chưa nhập mật khẩu</mdb-error>
-              <mdb-error *ngIf="passwordByEmail.invalid && passwordByEmail.dirty && !passwordByEmail.hasError('required')">Mật khẩu 6 ký tự trở lên</mdb-error>
+              <mdb-error class="mt-2" *ngIf="passwordByEmail.hasError('required') && passwordByEmail.touched">Chưa nhập mật khẩu</mdb-error>
+              <mdb-error class="mt-2" *ngIf="passwordByEmail.invalid && passwordByEmail.dirty && !passwordByEmail.hasError('required')">Mật khẩu 6 ký tự trở lên</mdb-error>
             </div>
             <div class="alert alert-danger" role="alert" *ngIf="error">
               {{errorLabel}}

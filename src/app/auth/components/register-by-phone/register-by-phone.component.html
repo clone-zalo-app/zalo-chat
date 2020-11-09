@@ -1,0 +1,57 @@
+
+<form class="p-3" *ngIf="!verifyCode" [formGroup]="formPhone">
+  <div class="md-form">
+    <input mdbValidate type="text" id="phone" [ngClass]="verify?'disabled':''" class="form-control" mdbInput
+           formControlName="phone">
+    <label for="phone">Số điện thoại</label>
+    <mdb-error class="mt-2" *ngIf="phone.hasError('required') && phone.touched ">Chưa nhập số điện thoại</mdb-error>
+    <mdb-error class="mt-2" *ngIf="phone.invalid && phone.dirty && !phone.hasError('required')">Nhập sai số điện thoại</mdb-error>
+  </div>
+  <div class="md-form" *ngIf="verify">
+    <input type="password" id="pass" class="form-control" mdbInput formControlName="password">
+    <label for="pass">Mật khẩu</label>
+    <mdb-error *ngIf="pass.invalid && pass.dirty && !pass.hasError('required')">Mật khẩu 6 ký tự trở
+      lên
+    </mdb-error>
+  </div>
+  <div class="md-form" *ngIf="verify">
+    <input type="password" id="re-pass" class="form-control" mdbInput formControlName="rePassword">
+    <label for="re-pass">Nhập lại mật khẩu</label>
+  </div>
+  <div id="phone-sign-in-recaptcha" class="mt-2 mb-3" [ngClass]="message? 'mt-5': ''"></div>
+
+  <button mdbBtn class="custom-button" *ngIf="!verify && !loading" block="true"
+          [disabled]="!sendCodeBtn || phone.status !== 'VALID'"
+          (click)="sendOTP()"
+          mdbWavesEffect type="submit" disabled>
+    Gửi mã OTP
+  </button>
+  <button mdbBtn class="custom-button" *ngIf="verify && !loading" block="true"
+          [disabled]="pass.status !== 'VALID' || rePass.status !== 'VALID'"
+          (click)="onRegisterByPhone()"
+          mdbWavesEffect type="submit" disabled>
+    Đăng ký
+  </button>
+  <button *ngIf="loading" mdbBtn class="custom-button" block="true" disabled>
+    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+    <span class="sr-only">Loading...</span>
+  </button>
+</form>
+
+<div class="p-3" *ngIf="verifyCode">
+  <div class="md-form">
+    <input type="text" id="code" class="form-control" [(ngModel)]="code" mdbInput>
+    <label for="code">Code</label>
+  </div>
+
+  <button *ngIf="!loading" mdbBtn class="custom-button" block="true"
+          [disabled]="!code || code.length<6"
+          (click)="verifyOTP()"
+          mdbWavesEffect type="submit" disabled>
+    Xác nhận mã OTP
+  </button>
+  <button *ngIf="loading" mdbBtn class="custom-button" block="true" disabled>
+    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+    <span class="sr-only">Loading...</span>
+  </button>
+</div>

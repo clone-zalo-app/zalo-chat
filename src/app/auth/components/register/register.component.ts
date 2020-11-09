@@ -1,8 +1,7 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import * as CONST from '../../../core/constants';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import * as firebase from 'firebase';
 import {AuthService} from '../../../core/services/auth.service';
 import {RegisterModel} from '../../../core/models/register.model';
 import {VerifyCodeEmailModel} from '../../../core/models/verifyCodeEmail.model';
@@ -12,26 +11,19 @@ import {VerifyCodeEmailModel} from '../../../core/models/verifyCodeEmail.model';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit, AfterViewInit {
+export class RegisterComponent implements OnInit {
 
   routing = CONST.frontendUrl;
   registerByEmail = false;
   registerByPhone = true;
-  formPhone: FormGroup;
   formEmail: FormGroup;
   registerForm: FormGroup;
-  verifyCode = false;
-  code: string;
   error: any;
   errorMessage: any;
   loading = false;
-  phoneRecaptchaVerifier: firebase.auth.RecaptchaVerifier;
-  sendCodeBtn = false;
-  message: string;
-  confirmation: firebase.auth.ConfirmationResult;
-  phoneVerify: string;
-  verify = false;
+  verifyStatus = false;
   codeEmail = false;
+  code: string;
 
   constructor(private router: Router,
               private fb: FormBuilder,
@@ -39,54 +31,31 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   ) {
   }
 
-  get phone() {
-    return this.formPhone.get('phone');
-  }
 
-  get pass() {
-    return this.formPhone.get('password');
-  }
-
-  get rePass() {
-    return this.formPhone.get('rePassword');
-  }
-
-  get password() {
-    return this.formEmail.get('password');
-  }
 
   get email() {
     return this.formEmail.get('email');
   }
-
+  get password() {
+    return this.formEmail.get('password');
+  }
   get rePassword() {
     return this.formEmail.get('rePassword');
   }
+  checkRePassword() {
+    return this.password.value === this.rePassword.value;
+  }
   ngOnInit(): void {
-    this.formPhone = this.fb.group({
-      phone: ['', [Validators.required, Validators.pattern('[0-9]{10}')]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      rePassword: ['', [Validators.required, Validators.minLength(6)]]
-    });
+
     this.formEmail = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      rePassword: ['', [Validators.required, Validators.minLength(6)]]
+      rePassword: ['', [Validators.required]]
     });
 
   }
 
-  ngAfterViewInit(): void {
-    this.phoneRecaptchaVerifier = new firebase.auth.RecaptchaVerifier('phone-sign-in-recaptcha', {
-      'size': 'normal',
-      'callback': (response) => {
-        this.sendCodeBtn = true;
-        this.message = null;
-      }
-    });
-    this.phoneRecaptchaVerifier.render().then();
 
-  }
 
 
   onRegisterByEmail() {
@@ -121,59 +90,19 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     this.authService.onVerifyCodeByeEmail(verifyInfo).subscribe(res => {
       this.loading = false;
       if (res.status == 'fail') {
+        this.verifyStatus = true;
         this.loading = false;
         this.error = true;
         this.errorMessage = res.message;
       } else {
         this.router.navigate(['auth', this.routing.LOGIN]);
       }
-      console.log(res);
     }, error => {
       this.loading = false;
-      console.log(error);
     });
   }
 
-  sendOTP() {
-    let phone = '+84' + this.phone.value;
-    this.loading = true;
-    this.authService.sendOTP(phone, this.phoneRecaptchaVerifier).subscribe(value => {
-      this.verifyCode = true;
-      this.confirmation = value;
-      this.message = null;
-      this.loading = false;
-      this.phoneRecaptchaVerifier.clear();
-    }, error => {
-      this.message = error.message;
-      this.sendCodeBtn = false;
-      this.loading = false;
-    });
-  }
 
-  verifyOTP() {
-    this.loading = true;
-    this.confirmation.confirm(this.code).then((userCreated) => {
-      this.verify = true;
-      this.loading = false;
-    }).catch(error => {
-      this.message = error.message;
-      this.loading = false;
-    });
-  }
 
-  onRegisterByPhone() {
-    this.loading = true;
-    const registerInfo: RegisterModel = {
-      email: '',
-      userName: '',
-      password: '',
-      firstName: '',
-      lastName: '',
-      phone: this.phone.value
-    };
-    this.authService.registerByPhone(registerInfo).subscribe(res => {
-      this.loading = false;
-      this.router.navigate([this.routing.AUTH, this.routing.LOGIN]);
-    });
-  }
+
 }
