@@ -10,16 +10,14 @@ import {UserModel} from '../../../../core/models/user.model';
 })
 export class MessengerItemComponent implements OnInit {
 
-  @Input() mess: MessItem;
-  user: UserModel;
+  @Input() mess:MessItem;
+  user:UserModel;
   constructor() {
     this.user = JSON.parse(localStorage.getItem('user'));
   }
 
   ngOnInit(): void {
-    console.log(this.user)
     console.log(this.mess)
-
   }
 
 }
