@@ -25,7 +25,7 @@ jobs:
     - run: npm install
     - run: npm run-script build
       
-    - uses: w9jds/firebase-action@master
+    - uses: zalo-app-32088
       with:
         args: deploy --only hosting
       env:
