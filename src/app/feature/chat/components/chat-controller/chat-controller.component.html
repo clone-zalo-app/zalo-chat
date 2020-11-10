@@ -14,7 +14,7 @@
   </div>
   <div class="col-md-12 border-top pl-2">
     <div class="md-form mb-0 mt-0 float-left">
-      <input placeholder="nhap" mdbInput type="text" id="form1" [(ngModel)]="mess" (keyup)="onCheck()"  class="form-control pl-2 ">
+      <input placeholder="nhap" mdbInput type="text" id="form1"  [(ngModel)]="mess" (keyup.enter)="onSend()" (keyup)="onCheck()"  class="form-control pl-2 ">
     </div>
     <a class="float-right mr-4 mt-3 text-muted" (click)="onLike()" *ngIf="!send"><mdb-icon class="custom-icon like" fas icon="thumbs-up"></mdb-icon></a>
     <a class="float-right mt-3 font-weight-bold mr-4 text-primary" *ngIf="send" (click)="onSend()">Gửi</a>

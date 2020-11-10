@@ -43,7 +43,6 @@ export class ChatPageComponent implements OnInit {
   getListChat() {
     const time = Date();
     this.socket.on('message', (data: any) => {
-      console.log(data)
       let user: UserModel = {
         email: data.user
       }
@@ -54,6 +53,7 @@ export class ChatPageComponent implements OnInit {
         time: time
       }
       this.messList.push(messItem)
+      this.onScrollTop();
     });
   }
 
