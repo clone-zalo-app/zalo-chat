@@ -1,3 +1,11 @@
 .img{
   width: 100%;
 }
+@media screen and (max-width: 1600px) {
+  .alert{
+    display: block !important;
+  }
+  .system {
+    display: none !important;
+  }
+}
