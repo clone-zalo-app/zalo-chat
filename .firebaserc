@@ -1,6 +1,6 @@
 {
   "projects": {
-    "default": "clone-zalo-app",
+    "default": "zalo-app",
     "yes": "zalo-app-32088"
   }
 }
