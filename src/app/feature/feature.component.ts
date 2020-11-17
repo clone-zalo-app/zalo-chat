@@ -13,6 +13,7 @@ export class FeatureComponent implements OnInit {
   room: Room;
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('user'));
+    console.log(this.user)
   }
   onGetRoom(value) {
     this.room = value;

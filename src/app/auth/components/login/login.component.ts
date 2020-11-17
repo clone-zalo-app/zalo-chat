@@ -54,12 +54,15 @@ export class LoginComponent implements OnInit{
       password: this.formPhone.get('passwordByPhone').value
     }
     this.authService.loginByPhone(loginInfo).subscribe(res => {
+      console.log(res)
       if (res.status == 'fail') {
         this.loading = false;
         this.error = true
         this.errorLabel = res.message
       } else {
-        this.authService.saveLocalStorage(CONST.LocalStorage.USER, res.data);
+        this.authService.saveLocalStorage(CONST.LocalStorage.USER, res.data.user);
+        this.authService.saveLocalStorage(CONST.LocalStorage.TOKEN, res.data.token);
+
         this.router.navigate([this.routing.ZALO_APP])
       }
     },error => {this.loading = false})
@@ -78,7 +81,8 @@ export class LoginComponent implements OnInit{
           this.error = true
           this.errorLabel = res.message
         } else {
-          this.authService.saveLocalStorage(CONST.LocalStorage.USER, res.data);
+          this.authService.saveLocalStorage(CONST.LocalStorage.USER, res.data.user);
+          this.authService.saveLocalStorage(CONST.LocalStorage.TOKEN, res.data.token);
           this.router.navigate([this.routing.ZALO_APP])
         }
         },

@@ -16,5 +16,6 @@ export const apiUrl = {
 
 }
 export const LocalStorage = {
-  USER: 'user'
+  USER: 'user',
+  TOKEN: 'token'
 }

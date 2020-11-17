@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
-import {Room} from '../models/room';
-import {User} from '../models/user';
 import {AngularFireAuth} from '@angular/fire/auth';
 import * as CONST from '../constants';
 import {UserModel} from '../models/user.model';

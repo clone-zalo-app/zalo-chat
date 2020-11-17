@@ -6,9 +6,7 @@ import * as CONST from '../constants';
 import {LoginByPhoneModel} from '../models/loginByPhone.model';
 import {LoginByEmailModel} from '../models/loginByEmail.model';
 import {VerifyCodeEmailModel} from '../models/verifyCodeEmail.model';
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthService extends CommonService{
 
 

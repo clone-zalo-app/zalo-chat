@@ -85,6 +85,7 @@ export class RegisterByPhoneComponent implements OnInit, AfterViewInit {
   verifyOTP() {
     this.loading = true;
     this.confirmation.confirm(this.code).then((userCreated) => {
+      this.verifyCode = false;
       this.verify = true;
       this.loading = false;
     }).catch(error => {
@@ -98,7 +99,7 @@ export class RegisterByPhoneComponent implements OnInit, AfterViewInit {
     const registerInfo: RegisterModel = {
       email: '',
       userName: '',
-      password: '',
+      password: this.pass.value,
       firstName: '',
       lastName: '',
       phone: this.phone.value
